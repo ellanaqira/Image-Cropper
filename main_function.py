@@ -13,29 +13,16 @@ class Main_function:
             img_size = list(image.size)
             print(f"image size {img_size}")
             print(type(img_size))
+            print(type(img_size[0]))
+            img_width = int(img_size[0])
+            img_height = int(img_size[1])
 
-            # if img_size[0] <= 5000 and img_size[1] <= 5000:
-            #     image = image.resize((int(img_size[0]/3), int(img_size[1]/3)))
-            #     print("size divided by 3")
-        while img_size[0] > 1000 or img_size[1] > 1000:
-            image = image.resize((int(img_size[0]/2), int(img_size[1]/2)))
-            print(f"size divided by 2 = {image}")
-            if img_size[0] < 1000 or img_size[1] < 1000:
-                photo = ImageTk.PhotoImage(image)
-                image_label.config(image=photo)
-                image_label.photo = photo
-
-
-            # else:
-            #     image = image.resize((img_size[0], img_size[1]))
-            
-            # photo = ImageTk.PhotoImage(image)
-            # image_label.config(image=photo)
-            # image_label.photo = photo
-
-        
-    # def display_image(self, img_label):
-    #     image = Image.open(self.image_file_path)
-    #     photo = ImageTk.PhotoImage(image)
-    #     img_label.config(imgage=photo)
-    #     img_label.photo = photo
+            while img_width > 1000 or img_height > 1000:
+                img_width = img_width/2
+                img_height = img_height/2
+                image = image.resize((int(img_width), int(img_height)))
+                print(f"size divided by 2 = {img_width}")
+            photo = ImageTk.PhotoImage(image)
+            image_label.config(image=photo)
+            image_label.photo = photo
+                
