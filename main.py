@@ -8,7 +8,10 @@ class Main_window:
         # CALLING ELEMENT FROM MAIN_ELEMENT
         self.main_element = Main_element(self.main_window)
         self.main_element.image_label()
+
         self.main_element.open_image_button()
+        self.main_element.width_height_te()
+        self.main_element.crop_button()
 
         self.window_setup()
 
