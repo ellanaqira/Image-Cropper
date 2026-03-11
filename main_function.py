@@ -32,13 +32,40 @@ class Main_function:
             width_label.insert("0", img_size[0])
             height_label.insert("0", img_size[1])
 
-    def crop_img_cmd(self, left_entry, top_entry, right_entry, bottom_entry):
-        crop_l = int(left_entry.get())
-        crop_u = int(top_entry.get())
-        crop_r = int(right_entry.get())
-        crop_b = int(bottom_entry.get())
+    def crop_img_cmd(self, master, left_entry, top_entry, right_entry, bottom_entry, info_icon):
+        try:
+            crop_l = int(left_entry.get())
+            crop_u = int(top_entry.get())
+            crop_r = int(right_entry.get())
+            crop_b = int(bottom_entry.get())
 
-        real_img = Image.open(self.image_file_path)
-        print(f"real image = {real_img.size}")
-        croppped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
-        croppped_img.show()
+            real_img = Image.open(self.image_file_path)
+            print(f"real image = {real_img.size}")
+            croppped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
+            croppped_img.show()
+        except ValueError:
+            info_win = Toplevel(master)
+            info_win.geometry("350x170")
+            info_win.resizable(FALSE, FALSE)
+            info_win.title('Information')
+            info_win.config(bg="#FFFFFF")
+
+            info_label = Label(info_win,
+                               font=('system ui', 11),
+                               justify='left',
+                               image=info_icon,
+                               compound='left',
+                               bg="#FFFFFF",
+                               padx=20,
+                               text="""
+Information
+
+- Left must be smaller than Right
+- Top must be smaller than Bottom""")
+            info_label.pack()
+
+            Button(info_win,
+                text="OK",
+                width=10,
+                pady=3,
+                command=lambda:info_win.destroy()).pack(pady=(25,0))

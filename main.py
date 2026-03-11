@@ -9,10 +9,14 @@ class Main_window:
         self.main_element = Main_element(self.main_window)
         self.main_element.image_label()
 
+        self.main_element.separator1()
         self.main_element.left_cropinput()
-        self.main_element.top_cropinput()
+        self.main_element.smaller_symbol1()
         self.main_element.right_cropinput()
+        self.main_element.top_cropinput()
+        self.main_element.smaller_symbol2()
         self.main_element.bottom_cropinput()
+        self.main_element.separator2()
 
         self.main_element.width_height_te()
         self.main_element.crop_button()
@@ -23,7 +27,6 @@ class Main_window:
     def window_setup(self):
         self.main_window.geometry("1000x600")
         self.main_window.title("Image Cropper")
-        self.main_window.config(bg="#5E5E5E")
 
     def run(self):
         self.main_window.mainloop()

@@ -3,7 +3,11 @@ from tkinter import *
 class Main_frame:
     def __init__(self):
         self.frame_tool = Frame()
-        self.frame_tool.pack(side='right', padx=7)
+        self.frame_tool.pack(side='right')
+
+        # Separator frame1
+        self.frame_separator1 = Frame(self.frame_tool)
+        self.frame_separator1.pack()
 
         # Crop input Frame
         self.frame_ci = Frame(self.frame_tool)
@@ -12,6 +16,10 @@ class Main_frame:
         # Crop button frame
         self.frame_cb = Frame(self.frame_tool)
         self.frame_cb.pack()
+
+        # Separator frame2
+        self.frame_separator2 = Frame(self.frame_tool)
+        self.frame_separator2.pack()
 
         # Weight and Height Frame
         self.frame_wh = Frame(self.frame_tool)
