@@ -16,32 +16,107 @@ class Main_element:
                           bd=2)
         self.img_label.pack(expand=True, fill='both', padx=(20,0), pady=20)
 
+    class Crop_Input:
+        def __init__(self, frame, configure):
+            self.frame = frame
+            self.title = configure.get ("title", "")
+            self.row_label = configure.get("row l", 0)
+            self.col_label = configure.get("col l", 0)
+            self.entry_width = configure.get("ent w", 0)
+            self.row_entry = configure.get("row e", 0)
+            self.col_entry = configure.get("col e", 0)
+        # crop input title and entry
+        def ci_titen(self):
+            crop_label = Label(self.frame,
+                               text=self.title)
+            crop_label.grid(row=self.row_label, column=self.col_label)
+
+            self.crop_entry = Entry(self.frame,
+                               width=self.entry_width)
+            self.crop_entry.grid(row=self.row_entry, column=self.col_entry)
+        
+    def left_cropinput(self):
+        self.configure = {"title" : "Left",
+                          "row l" : 0,
+                          "col l" : 0,
+                          "ent w" : 7,
+                          "row e" : 1,
+                          "col e" : 0
+                          }
+        self.left_ci = self.Crop_Input(self.main_frame.frame_ci, self.configure)
+        self.left_ci.ci_titen()
+
+    def top_cropinput(self):
+        self.configure = {"title" : "Top",
+                          "row l" : 0,
+                          "col l" : 1,
+                          "ent w" : 7,
+                          "row e" : 1,
+                          "col e" : 1
+                          }
+        self.top_ci = self.Crop_Input(self.main_frame.frame_ci, self.configure)
+        self.top_ci.ci_titen()
+
+    def right_cropinput(self):
+        self.configure = {"title" : "Right",
+                          "row l" : 2,
+                          "col l" : 0,
+                          "ent w" : 7,
+                          "row e" : 3,
+                          "col e" : 0
+                          }
+        self.right_ci = self.Crop_Input(self.main_frame.frame_ci, self.configure)
+        self.right_ci.ci_titen()
+
+    def bottom_cropinput(self):
+        self.configure = {"title" : "Bottom",
+                          "row l" : 2,
+                          "col l" : 1,
+                          "ent w" : 7,
+                          "row e" : 3,
+                          "col e" : 1
+                          }
+        self.bottom_ci = self.Crop_Input(self.main_frame.frame_ci, self.configure)
+        self.bottom_ci.ci_titen()
+
+    def crop_button(self):
+        crop_btn = Button(self.main_frame.frame_cb,
+                          text='Crop',
+                          pady=2,
+                          padx=44,
+                          bg="#4D75B1",
+                          fg="#ffffff",
+                          relief='flat',
+                          command=lambda: self.main_function.crop_img_cmd(self.left_ci.crop_entry,
+                                                                  self.top_ci.crop_entry,
+                                                                  self.right_ci.crop_entry,
+                                                                  self.bottom_ci.crop_entry))
+        crop_btn.grid(row=0, column=0)
+
     def width_height_te(self):
         # width TITLE AND ENTRY BAR
         width_title = Label(self.main_frame.frame_wh,
                            text='Width')
         width_title.grid(row=0, column=0)
         self.width_entry = Entry(self.main_frame.frame_wh,
-                      width=10)
+                                 width=7)
         self.width_entry.grid(row=1, column=0)
         # HEIGHT TITLE AND ENTRY BAR
         height_title = Label(self.main_frame.frame_wh,
                            text='Height')
         height_title.grid(row=0, column=1)
         self.height_entry = Entry(self.main_frame.frame_wh,
-                      width=10)
+                      width=7)
         self.height_entry.grid(row=1, column=1)
-
-    def crop_button(self):
-        crop_btn = Button(self.main_frame.frame_button,
-                          text='Crop',
-                          command=lambda: self.main_function.crop_img_cmd(self.width_entry,
-                                                                          self.height_entry))
-        crop_btn.grid(row=0, column=0)
 
     def open_image_button(self):
         open_img_btn = Button(self.main_frame.frame_button,
                               text="Open Image",
+                              pady=2,
+                              padx=20,
+                              bg="#4D75B1",
+                              fg="#ffffff",
+                              relief='flat',
                               command=lambda: self.main_function.open_file(self.img_label, 
                                                                            self.width_entry, 
                                                                            self.height_entry))

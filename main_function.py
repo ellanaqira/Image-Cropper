@@ -32,8 +32,13 @@ class Main_function:
             width_label.insert("0", img_size[0])
             height_label.insert("0", img_size[1])
 
-    def crop_img_cmd(self, width_entry, height_entry):
-        crop_width = width_entry.get()
-        crop_height = height_entry.get()
-        print(crop_width)
-        print(crop_height)
+    def crop_img_cmd(self, left_entry, top_entry, right_entry, bottom_entry):
+        crop_l = int(left_entry.get())
+        crop_u = int(top_entry.get())
+        crop_r = int(right_entry.get())
+        crop_b = int(bottom_entry.get())
+
+        real_img = Image.open(self.image_file_path)
+        print(f"real image = {real_img.size}")
+        croppped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
+        croppped_img.show()
