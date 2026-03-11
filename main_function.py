@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import filedialog as fd
 from PIL import Image, ImageTk
+import os
 
 class Main_function:
-    def open_file(self, image_label, width_label, height_label):
+    def open_file(self, name_label, image_label, width_label, height_label):
         self.file_types = ()
         self.image_file_path = fd.askopenfilename(initialdir='/home/lana/Pictures',
                                          filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.ico"),
@@ -11,6 +12,7 @@ class Main_function:
         if self.image_file_path:
             image = Image.open(self.image_file_path)
             img_size = list(image.size)
+            image_name = (os.path.basename(self.image_file_path))
             print(f"image size {img_size}")
             print(img_size[0])
             print(img_size[1])
@@ -24,6 +26,7 @@ class Main_function:
                 print(f"width divided by 2  = {img_width}")
                 print(f"height divided by 2 = {img_height}")
             photo = ImageTk.PhotoImage(image)
+            name_label.config(text=image_name)
             image_label.config(image=photo)
             image_label.photo = photo
 

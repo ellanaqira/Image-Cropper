@@ -11,13 +11,18 @@ class Main_element:
         self.main_function = Main_function()
         self.aset = Aset()
 
+    def file_name_label(self):
+        self.file_name = Label(self.main_window,
+                               text="No Image")
+        self.file_name.pack(pady=(20,0))
+
     def image_label(self):
         self.img_label = Label(self.main_window,
                           bg="#f8f8f8",
                           relief='sunken',
                           padx=0,
                           bd=2)
-        self.img_label.pack(expand=True, fill='both', side="right", padx=(20,0), pady=20)
+        self.img_label.pack(expand=True, fill='both', padx=(20,0), pady=(0,20))
 
     class Crop_Input:
         def __init__(self, frame, configure):
@@ -144,7 +149,8 @@ class Main_element:
                               bg="#4D75B1",
                               fg="#ffffff",
                               relief='flat',
-                              command=lambda: self.main_function.open_file(self.img_label, 
+                              command=lambda: self.main_function.open_file(self.file_name,
+                                                                           self.img_label, 
                                                                            self.width_entry, 
                                                                            self.height_entry))
         open_img_btn.grid(row=1, column=0)

@@ -7,6 +7,7 @@ class Main_window:
 
         # CALLING ELEMENT FROM MAIN_ELEMENT
         self.main_element = Main_element(self.main_window)
+        self.main_element.file_name_label()
         self.main_element.image_label()
 
         self.main_element.separator1()
