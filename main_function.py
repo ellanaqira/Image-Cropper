@@ -28,14 +28,14 @@ class Main_function:
             photo = ImageTk.PhotoImage(image)
             name_label.config(text=f"{self.image_file_path}")
             image_label.config(image=photo)
-            image_label.photo = photo
+            image_label.image = photo
 
             # width_label.delete('0', 'end')
             # height_label.delete('0', 'end')
             width_label.config(text=img_size[0])
             height_label.config(text=img_size[1])
 
-    def crop_img_cmd(self, master, left_entry, top_entry, right_entry, bottom_entry, cropw_label, croph_label, info_icon):
+    def crop_img_cmd(self, master, left_entry, top_entry, right_entry, bottom_entry, cropw_label, croph_label, crop_prev, info_icon):
         try:
             crop_l = int(left_entry.get())
             crop_u = int(top_entry.get())
@@ -44,12 +44,24 @@ class Main_function:
 
             real_img = Image.open(self.image_file_path)
             print(f"real image = {real_img.size}")
-            croppped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
-            crop_img_size = list(croppped_img.size)
-            cropw_label.config(text=crop_img_size[0])
-            croph_label.config(text=crop_img_size[1])
+            cropped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
+            crop_img_size = list(cropped_img.size)
+            crop_width = int(crop_img_size[0])
+            crop_height = int(crop_img_size[1])
+            cropw_label.config(text=crop_width)
+            croph_label.config(text=crop_height)
+
+            while crop_width > 900 or crop_height > 900:
+                crop_width = crop_width/2
+                crop_height = crop_height/2
+                cropped_img = cropped_img.resize((int(crop_width), int(crop_height)))
+
+            show_img = ImageTk.PhotoImage(cropped_img)
+            crop_prev.config(image=show_img)
+            crop_prev.image = show_img
+            print(cropped_img)
             
-            croppped_img.show()
+            cropped_img.show()
         except ValueError:
             info_win = Toplevel(master)
             info_win.geometry("350x170")

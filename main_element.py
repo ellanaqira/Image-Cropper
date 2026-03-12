@@ -18,15 +18,23 @@ class Main_element:
                                bd=2,
                                padx=5,
                                bg="#ffffff")
-        self.file_name.pack(padx=(20,0), pady=(20,0), fill='x')
+        self.file_name.pack(padx=(10,0), pady=(10,0), fill='x')
 
-    def image_label(self):
+    def ori_image_label(self):
         self.img_label = Label(self.main_window,
                           bg="#f8f8f8",
                           relief='sunken',
                           padx=0,
                           bd=2)
-        self.img_label.pack(expand=True, fill='both', padx=(20,0), pady=(0,20))
+        self.img_label.pack(expand=True, fill='both', side='right', padx=(5,0), pady=(0,10))
+
+    def crop_image_label(self):
+        self.crop_img_label = Label(self.main_window,
+                          bg="#f8f8f8",
+                          relief='sunken',
+                          padx=0,
+                          bd=2)
+        self.crop_img_label.pack(expand=True, fill='both', side='left', padx=(10,0), pady=(0,10))
 
     class Crop_Input:
         def __init__(self, frame, configure):
@@ -160,6 +168,7 @@ class Main_element:
                                                                           self.bottom_ci.crop_entry,
                                                                           self.cropwidth_label,
                                                                           self.cropheight_label,
+                                                                          self.crop_img_label,
                                                                           self.aset.info_icon))
         crop_btn.grid(row=0, column=0)
 

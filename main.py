@@ -8,7 +8,8 @@ class Main_window:
         # CALLING ELEMENT FROM MAIN_ELEMENT
         self.main_element = Main_element(self.main_window)
         self.main_element.file_name_label()
-        self.main_element.image_label()
+        self.main_element.ori_image_label()
+        self.main_element.crop_image_label()
 
         self.main_element.original_size_label()
         self.main_element.size_label_ori()
