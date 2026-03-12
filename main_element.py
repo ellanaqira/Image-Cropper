@@ -13,8 +13,12 @@ class Main_element:
 
     def file_name_label(self):
         self.file_name = Label(self.main_window,
-                               text="No Image")
-        self.file_name.pack(pady=(20,0))
+                               text="No Image",
+                               relief='sunken',
+                               bd=2,
+                               padx=5,
+                               bg="#ffffff")
+        self.file_name.pack(padx=(20,0), pady=(20,0), fill='x')
 
     def image_label(self):
         self.img_label = Label(self.main_window,
@@ -43,10 +47,47 @@ class Main_element:
                                width=self.entry_width)
             self.crop_entry.grid(row=self.row_entry, column=self.col_entry)
 
-    def separator1(self):
-        sep_ln1 = Label(self.main_frame.frame_separator1,
-                       image=self.aset.line)
-        sep_ln1.grid(row=0, column=0, pady=(5,0))
+    def original_size_label(self):
+        ori_size_label = Label(self.main_frame.frame_separator1,
+                          text="_____[Original]_____")
+        ori_size_label.grid(row=0, column=0)
+
+    def size_label_ori(self):
+        # width label
+        self.width_label = Label(self.main_frame.frame_wh_ori,
+                                 width=7,
+                                 bg="#C4C4C4",
+                                 relief='sunken',
+                                 bd=1)
+        self.width_label.grid(row=0, column=0)
+        # height label
+        self.height_label = Label(self.main_frame.frame_wh_ori,
+                                  width=7,
+                                  bg="#C4C4C4",
+                                  relief='sunken',
+                                  bd=1)
+        self.height_label.grid(row=0, column=1)
+
+    def cropped_size_label(self):
+        crop_size_label = Label(self.main_frame.frame_separator2,
+                          text="_____[Cropped]_____")
+        crop_size_label.grid(row=0, column=0)
+
+    def size_label_crop(self):
+        # width label
+        self.cropwidth_label = Label(self.main_frame.frame_wh_crop,
+                                 width=7,
+                                 bg="#C4C4C4",
+                                 relief='sunken',
+                                 bd=1)
+        self.cropwidth_label.grid(row=0, column=0)
+        # height label
+        self.cropheight_label = Label(self.main_frame.frame_wh_crop,
+                                  width=7,
+                                  bg="#C4C4C4",
+                                  relief='sunken',
+                                  bd=1)
+        self.cropheight_label.grid(row=0, column=1)
 
     def left_cropinput(self):
         self.configure = {"title" : "Left",
@@ -117,41 +158,22 @@ class Main_element:
                                                                           self.top_ci.crop_entry,
                                                                           self.right_ci.crop_entry,
                                                                           self.bottom_ci.crop_entry,
+                                                                          self.cropwidth_label,
+                                                                          self.cropheight_label,
                                                                           self.aset.info_icon))
         crop_btn.grid(row=0, column=0)
-    
-    def separator2(self):
-        sep_ln2 = Label(self.main_frame.frame_separator2,
-                       image=self.aset.line)
-        sep_ln2.grid(row=0, column=0, pady=(5,0))
-
-    def width_height_te(self):
-        # width TITLE AND ENTRY BAR
-        width_title = Label(self.main_frame.frame_wh,
-                           text='Width')
-        width_title.grid(row=0, column=0)
-        self.width_entry = Entry(self.main_frame.frame_wh,
-                                 width=7)
-        self.width_entry.grid(row=1, column=0)
-        # HEIGHT TITLE AND ENTRY BAR
-        height_title = Label(self.main_frame.frame_wh,
-                           text='Height')
-        height_title.grid(row=0, column=1)
-        self.height_entry = Entry(self.main_frame.frame_wh,
-                      width=7)
-        self.height_entry.grid(row=1, column=1)
 
     def open_image_button(self):
         open_img_btn = Button(self.main_frame.frame_button,
                               text="Open Image",
-                              pady=2,
-                              padx=20,
+                              pady=48,
+                              padx=21,
                               bg="#4D75B1",
                               fg="#ffffff",
                               relief='flat',
                               command=lambda: self.main_function.open_file(self.file_name,
                                                                            self.img_label, 
-                                                                           self.width_entry, 
-                                                                           self.height_entry))
-        open_img_btn.grid(row=1, column=0)
+                                                                           self.width_label, 
+                                                                           self.height_label))
+        open_img_btn.grid(row=1, column=0, pady=(50,0))
         

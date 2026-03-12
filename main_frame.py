@@ -9,16 +9,17 @@ class Main_frame:
         self.frame_separator1 = Frame(self.frame_tool)
         self.frame_separator1.pack()
 
-        # Weight and Height Frame
-        self.frame_wh = Frame(self.frame_tool)
-        self.frame_wh.pack()
-
-        self.frame_button = Frame(self.frame_tool)
-        self.frame_button.pack()
+        # Original Weight and Height Frame
+        self.frame_wh_ori = Frame(self.frame_tool)
+        self.frame_wh_ori.pack()
 
         # Separator frame2
         self.frame_separator2 = Frame(self.frame_tool)
         self.frame_separator2.pack()
+
+        # Cropped Weight and Height Frame
+        self.frame_wh_crop = Frame(self.frame_tool)
+        self.frame_wh_crop.pack()
 
         # Crop input Frame
         self.frame_ci = Frame(self.frame_tool)
@@ -27,3 +28,7 @@ class Main_frame:
         # Crop button frame
         self.frame_cb = Frame(self.frame_tool)
         self.frame_cb.pack()
+
+        # Open image button frame
+        self.frame_button = Frame(self.frame_tool)
+        self.frame_button.pack()
