@@ -37,7 +37,6 @@ class Main_frame:
         self.frame_button = Frame(self.frame_tool)
         self.frame_button.pack()
 
-
         # Button tools frame
         self.frame_btn_tools = Frame(self.frame_tool)
         self.frame_btn_tools.pack()

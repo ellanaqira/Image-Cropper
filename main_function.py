@@ -48,21 +48,24 @@ class Main_function:
             print(f"real image = {real_img.size}")
             self.cropped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
             crop_img_size = list(self.cropped_img.size)
-            crop_width = int(crop_img_size[0])
-            crop_height = int(crop_img_size[1])
-            cropw_label.config(text=crop_width)
-            croph_label.config(text=crop_height)
-            self.raw_cropped_img = self.cropped_img.resize((crop_width, crop_height))
+            self.crop_width = int(crop_img_size[0])
+            self.crop_height = int(crop_img_size[1])
+            cropw_label.config(text=self.crop_width)
+            croph_label.config(text=self.crop_height)
+            self.raw_cropped_img = self.cropped_img.resize((self.crop_width, self.crop_height))
 
-            while crop_width > 800 or crop_height > 800:
-                crop_width = crop_width/2
-                crop_height = crop_height/2
-                self.cropped_img = self.cropped_img.resize((int(crop_width), int(crop_height)))
+            while self.crop_width > 800 or self.crop_height > 800:
+                self.crop_width = self.crop_width/2
+                self.crop_height = self.crop_height/2
+                self.cropped_img = self.cropped_img.resize((self.crop_width, self.crop_height))
 
             show_img = ImageTk.PhotoImage(self.cropped_img)
             crop_prev.config(image=show_img)
             crop_prev.image = show_img
             print(self.cropped_img)
+
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't added any image yet.")
     
         except ValueError:
             info_win = Toplevel(master)
@@ -103,3 +106,32 @@ Information
         except AttributeError:
             messagebox.showerror("No Image", "You haven't cropped any image.")
 
+    def zoomin_image(self, crop_label):
+        try:
+            self.crop_width = self.crop_width + 10
+            zoom_w = self.crop_width
+
+            self.crop_height = self.crop_height + 10
+            zoom_h = self.crop_height
+
+            zoom_img = self.cropped_img.resize((zoom_w, zoom_h))
+            show_img = ImageTk.PhotoImage(zoom_img)
+            crop_label.config(image=show_img)
+            crop_label.image = show_img
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't added any image yet.")
+
+    def zoomout_image(self, crop_label):
+        try:
+            self.crop_width = self.crop_width - 10
+            zoom_w = self.crop_width
+
+            self.crop_height = self.crop_height - 10
+            zoom_h = self.crop_height
+
+            zoom_img = self.cropped_img.resize((zoom_w, zoom_h))
+            show_img = ImageTk.PhotoImage(zoom_img)
+            crop_label.config(image=show_img)
+            crop_label.image = show_img
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't added any image yet.")
