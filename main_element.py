@@ -254,14 +254,37 @@ class Main_element:
 
         button3 = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.zoomin_icon,
-                                    lambda: self.main_function.zoomin_image(self.crop_img_label),
+                                    lambda: self.main_function.zoomin_ori_img(self.img_label),
                                     0,2)
         button3.button_tool()
 
         button4 = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.zoomout_icon,
-                                    lambda: self.main_function.zoomout_image(self.crop_img_label),
+                                    lambda: self.main_function.zoomout_ori_img(self.img_label),
                                     0,3)
         button4.button_tool()
+
+
+        button5 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    None,
+                                    None,
+                                    1,0)
+        button5.button_tool()
+
+        button6 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    None,
+                                    None,
+                                    1,1)
+        button6.button_tool()
+
+        button7 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.zoomin_crop_icon,
+                                    lambda: self.main_function.zoomin_crop_img(self.crop_img_label),
+                                    1,2)
+        button7.button_tool()
         
-        
+        button8 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.zoomout_crop_icon,
+                                    lambda: self.main_function.zoomout_crop_img(self.crop_img_label),
+                                    1,3)
+        button8.button_tool()

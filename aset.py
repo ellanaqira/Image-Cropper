@@ -8,6 +8,8 @@ class Aset:
         self.show_icon = self.load_img('aset/show_icon.png', (25,25))
         self.zoomin_icon = self.load_img('aset/zoomin.png', (25,25))
         self.zoomout_icon = self.load_img('aset/zoomout.png', (25,25))
+        self.zoomin_crop_icon = self.load_img('aset/crop_zoomin.png', (25,25))
+        self.zoomout_crop_icon = self.load_img('aset/crop_zoomout.png', (25,25))
 
 
     def load_img(self, path, size):

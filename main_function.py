@@ -12,28 +12,26 @@ class Main_function:
                                          filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.ico"),
                                                     ("all files", "*.*")])
         if self.image_file_path:
-            image = Image.open(self.image_file_path)
-            img_size = list(image.size)
+            self.image = Image.open(self.image_file_path)
+            img_size = list(self.image.size)
             image_name = (os.path.basename(self.image_file_path))
             print(f"image size {img_size}")
             print(img_size[0])
             print(img_size[1])
-            img_width = int(img_size[0])
-            img_height = int(img_size[1])
+            self.img_width = int(img_size[0])
+            self.img_height = int(img_size[1])
 
-            while img_width > 1000 or img_height > 1000:
-                img_width = img_width/2
-                img_height = img_height/2
-                image = image.resize((int(img_width), int(img_height)))
-                print(f"width divided by 2  = {img_width}")
-                print(f"height divided by 2 = {img_height}")
-            photo = ImageTk.PhotoImage(image)
+            while self.img_width > 1000 or self.img_height > 1000:
+                self.img_width = int(self.img_width/2)
+                self.img_height = int(self.img_height/2)
+                self.image = self.image.resize((self.img_width, self.img_height))
+                print(f"width divided by 2  = {self.img_width}")
+                print(f"height divided by 2 = {self.img_height}")
+            self.photo = ImageTk.PhotoImage(self.image)
             name_label.config(text=f"{self.image_file_path}")
-            image_label.config(image=photo)
-            image_label.image = photo
+            image_label.config(image=self.photo)
+            image_label.image = self.photo
 
-            # width_label.delete('0', 'end')
-            # height_label.delete('0', 'end')
             width_label.config(text=img_size[0])
             height_label.config(text=img_size[1])
 
@@ -55,8 +53,8 @@ class Main_function:
             self.raw_cropped_img = self.cropped_img.resize((self.crop_width, self.crop_height))
 
             while self.crop_width > 800 or self.crop_height > 800:
-                self.crop_width = self.crop_width/2
-                self.crop_height = self.crop_height/2
+                self.crop_width = int(self.crop_width/2)
+                self.crop_height = int(self.crop_height/2)
                 self.cropped_img = self.cropped_img.resize((self.crop_width, self.crop_height))
 
             show_img = ImageTk.PhotoImage(self.cropped_img)
@@ -106,32 +104,62 @@ Information
         except AttributeError:
             messagebox.showerror("No Image", "You haven't cropped any image.")
 
-    def zoomin_image(self, crop_label):
+    def zoomin_ori_img(self, ori_label):
         try:
-            self.crop_width = self.crop_width + 10
-            zoom_w = self.crop_width
+            self.img_width = self.img_width / (90/100)
+            zoom_w = int(self.img_width)
 
-            self.crop_height = self.crop_height + 10
-            zoom_h = self.crop_height
+            self.img_height = self.img_height / (90/100)
+            zoom_h = int(self.img_height)
+
+            zoom_img = self.image.resize((zoom_w, zoom_h))
+            show_img = ImageTk.PhotoImage(zoom_img)
+            ori_label.config(image=show_img)
+            ori_label.image = show_img
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't added any image yet.")
+
+    def zoomout_ori_img(self, ori_label):
+        try:
+            self.img_width = self.img_width * (90/100)
+            zoom_w = int(self.img_width)
+
+            self.img_height = self.img_height * (90/100)
+            zoom_h = int(self.img_height)
+
+            zoom_img = self.image.resize((zoom_w, zoom_h))
+            show_img = ImageTk.PhotoImage(zoom_img)
+            ori_label.config(image=show_img)
+            ori_label.image = show_img
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't added any image yet.")
+
+    def zoomin_crop_img(self, crop_label):
+        try:
+            self.crop_width = self.crop_width / (90/100)
+            zoom_w = int(self.crop_width)
+
+            self.crop_height = self.crop_height / (90/100)
+            zoom_h = int(self.crop_height)
 
             zoom_img = self.cropped_img.resize((zoom_w, zoom_h))
             show_img = ImageTk.PhotoImage(zoom_img)
             crop_label.config(image=show_img)
             crop_label.image = show_img
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't added any image yet.")
+            messagebox.showerror("No Image", "You haven't cropped any image yet.")
 
-    def zoomout_image(self, crop_label):
+    def zoomout_crop_img(self, crop_label):
         try:
-            self.crop_width = self.crop_width - 10
-            zoom_w = self.crop_width
+            self.crop_width = self.crop_width * (90/100)
+            zoom_w = int(self.crop_width)
 
-            self.crop_height = self.crop_height - 10
-            zoom_h = self.crop_height
+            self.crop_height = self.crop_height * (90/100)
+            zoom_h = int(self.crop_height)
 
             zoom_img = self.cropped_img.resize((zoom_w, zoom_h))
             show_img = ImageTk.PhotoImage(zoom_img)
             crop_label.config(image=show_img)
             crop_label.image = show_img
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't added any image yet.")
+            messagebox.showerror("No Image", "You haven't cropped any image yet.")
