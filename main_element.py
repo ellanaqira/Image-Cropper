@@ -11,31 +11,7 @@ class Main_element:
         self.main_function = Main_function()
         self.aset = Aset()
 
-    def file_name_label(self):
-        self.file_name = Label(self.main_window,
-                               text="No Image",
-                               relief='sunken',
-                               bd=2,
-                               padx=5,
-                               bg="#ffffff")
-        self.file_name.pack(padx=(10,0), pady=(10,0), fill='x')
-
-    def ori_image_label(self):
-        self.img_label = Label(self.main_window,
-                          bg="#f8f8f8",
-                          relief='sunken',
-                          padx=0,
-                          bd=2)
-        self.img_label.pack(expand=True, fill='both', side='right', padx=(5,0), pady=(0,10))
-
-    def crop_image_label(self):
-        self.crop_img_label = Label(self.main_window,
-                          bg="#f8f8f8",
-                          relief='sunken',
-                          padx=0,
-                          bd=2)
-        self.crop_img_label.pack(expand=True, fill='both', side='left', padx=(10,0), pady=(0,10))
-
+    # Crop input class
     class Crop_Input:
         def __init__(self, frame, configure):
             self.frame = frame
@@ -54,6 +30,63 @@ class Main_element:
             self.crop_entry = Entry(self.frame,
                                width=self.entry_width)
             self.crop_entry.grid(row=self.row_entry, column=self.col_entry)
+
+    # Separator line class
+    class Separator_Line:
+        def __init__(self, frame, image, row, column):
+            self.frame = frame
+            self.image = image
+            self.row = row
+            self.column = column
+
+        def separator_line(self):
+            line = Label(self.frame,
+                         image=self.image)
+            line.grid(row=self.row, column=self.column, pady=(10,0))
+
+    # Button tools class
+    class Button_Tools:
+        def __init__(self, frame, image, command, row, column):
+            self.frame = frame
+            self.image = image
+            self.command = command
+            self.row = row
+            self.column = column
+
+        def button_tool(self):
+            btn = Button(self.frame,
+                         image=self.image,
+                         command=self.command)
+            btn.grid(row=self.row, column=self.column, padx=2)
+
+    def file_name_label(self):
+        self.file_name = Label(self.main_window,
+                               text="No Image",
+                               relief='sunken',
+                               bd=2,
+                               padx=5,
+                               bg="#ffffff")
+        self.file_name.pack(padx=(10,0), pady=(0,0), fill='x')
+
+    def ori_image_label(self):
+        self.img_label = Label(self.main_window,
+                            #    text="Original Image",
+                            #    compound='top',
+                               bg="#FFFFFF",
+                               relief='sunken',
+                               padx=0,
+                               bd=2)
+        self.img_label.pack(expand=True, fill='both', side='right', padx=(5,0), pady=(0,10))
+
+    def crop_image_label(self):
+        self.crop_img_label = Label(self.main_window,
+                                    # text="Cropped Image",
+                                    # compound='top',
+                                    bg="#FFFFFF",
+                                    relief='sunken',
+                                    padx=0,
+                                    bd=2)
+        self.crop_img_label.pack(expand=True, fill='both', side='left', padx=(10,0), pady=(0,10))
 
     def original_size_label(self):
         ori_size_label = Label(self.main_frame.frame_separator1,
@@ -96,6 +129,12 @@ class Main_element:
                                   relief='sunken',
                                   bd=1)
         self.cropheight_label.grid(row=0, column=1)
+
+    def separator_ln1(self):
+        line = self.Separator_Line(self.main_frame.frame_separator3,
+                                   self.aset.line,
+                                   0,0)
+        line.separator_line()
 
     def left_cropinput(self):
         self.configure = {"title" : "Left",
@@ -172,6 +211,12 @@ class Main_element:
                                                                           self.aset.info_icon))
         crop_btn.grid(row=0, column=0)
 
+    def separator_ln2(self):
+        line = self.Separator_Line(self.main_frame.frame_button,
+                                   self.aset.line,
+                                   0,0)
+        line.separator_line()
+
     def open_image_button(self):
         open_img_btn = Button(self.main_frame.frame_button,
                               text="Open Image",
@@ -184,5 +229,39 @@ class Main_element:
                                                                            self.img_label, 
                                                                            self.width_label, 
                                                                            self.height_label))
-        open_img_btn.grid(row=1, column=0, pady=(50,0))
+        open_img_btn.grid(row=1, column=0, pady=(10,0))
+
+    def separator_ln3(self):
+        line = self.Separator_Line(self.main_frame.frame_button,
+                                self.aset.line,
+                                2,0)
+        line.separator_line()
+
+    def buttons(self):
+        button1 = Button(self.main_frame.frame_btn_tools,
+                         image=self.aset.bucket_icon,
+                         bg="#ffffff",
+                         command=lambda: self.main_function.change_bg_color(self.img_label,
+                                                                            self.crop_img_label,
+                                                                            button1))
+        button1.grid(row=0, column=0)
+
+        button2 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                          self.aset.show_icon,
+                          self.main_function.show_crop_img,
+                          0,1)
+        button2.button_tool()
+
+        button3 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                          None,
+                          None,
+                          0,2)
+        button3.button_tool()
+
+        button4 = self.Button_Tools(self.main_frame.frame_btn_tools,
+                          None,
+                          None,
+                          0,3)
+        button4.button_tool()
+        
         

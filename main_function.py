@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import colorchooser
+from tkinter import messagebox
 from tkinter import filedialog as fd
 from PIL import Image, ImageTk
 import os
@@ -44,24 +46,24 @@ class Main_function:
 
             real_img = Image.open(self.image_file_path)
             print(f"real image = {real_img.size}")
-            cropped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
-            crop_img_size = list(cropped_img.size)
+            self.cropped_img = real_img.crop((crop_l, crop_u, crop_r, crop_b))
+            crop_img_size = list(self.cropped_img.size)
             crop_width = int(crop_img_size[0])
             crop_height = int(crop_img_size[1])
             cropw_label.config(text=crop_width)
             croph_label.config(text=crop_height)
+            self.raw_cropped_img = self.cropped_img.resize((crop_width, crop_height))
 
-            while crop_width > 900 or crop_height > 900:
+            while crop_width > 800 or crop_height > 800:
                 crop_width = crop_width/2
                 crop_height = crop_height/2
-                cropped_img = cropped_img.resize((int(crop_width), int(crop_height)))
+                self.cropped_img = self.cropped_img.resize((int(crop_width), int(crop_height)))
 
-            show_img = ImageTk.PhotoImage(cropped_img)
+            show_img = ImageTk.PhotoImage(self.cropped_img)
             crop_prev.config(image=show_img)
             crop_prev.image = show_img
-            print(cropped_img)
-            
-            cropped_img.show()
+            print(self.cropped_img)
+    
         except ValueError:
             info_win = Toplevel(master)
             info_win.geometry("350x170")
@@ -88,3 +90,16 @@ Information
                 width=10,
                 pady=3,
                 command=lambda:info_win.destroy()).pack(pady=(25,0))
+            
+    def change_bg_color(self, ori_label, crop_label, button):
+        bg_color = colorchooser.askcolor()
+        ori_label.config(bg=bg_color[1])
+        crop_label.config(bg=bg_color[1])
+        button.config(bg=bg_color[1])
+
+    def show_crop_img(self):
+        try:
+            self.raw_cropped_img.show()
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't cropped any image.")
+

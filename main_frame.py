@@ -2,8 +2,8 @@ from tkinter import *
 
 class Main_frame:
     def __init__(self):
-        self.frame_tool = Frame()
-        self.frame_tool.pack(side='right')
+        self.frame_tool = Frame(relief='sunken', bd=2)
+        self.frame_tool.pack(side='right', anchor='n')
 
         # Separator frame1
         self.frame_separator1 = Frame(self.frame_tool)
@@ -21,6 +21,10 @@ class Main_frame:
         self.frame_wh_crop = Frame(self.frame_tool)
         self.frame_wh_crop.pack()
 
+        # Separator frame3
+        self.frame_separator3 = Frame(self.frame_tool)
+        self.frame_separator3.pack()
+
         # Crop input Frame
         self.frame_ci = Frame(self.frame_tool)
         self.frame_ci.pack()
@@ -32,3 +36,8 @@ class Main_frame:
         # Open image button frame
         self.frame_button = Frame(self.frame_tool)
         self.frame_button.pack()
+
+
+        # Button tools frame
+        self.frame_btn_tools = Frame(self.frame_tool)
+        self.frame_btn_tools.pack()
