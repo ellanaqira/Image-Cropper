@@ -175,3 +175,30 @@ Information
             crop_label.image = show_img
         except AttributeError:
             messagebox.showerror("No Image", "You haven't cropped any image yet.")
+
+    def flip_horizontal(self, crop_label):
+        try:
+            self.cropped_img = self.cropped_img.transpose(method=Image.FLIP_LEFT_RIGHT)
+            flip_h_img = self.cropped_img
+            show_flip_h = ImageTk.PhotoImage(flip_h_img)
+            crop_label.config(image=show_flip_h)
+            crop_label.image = show_flip_h
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+
+    def flip_vertical(self, crop_label):
+        try:
+            self.cropped_img = self.cropped_img.transpose(method=Image.FLIP_TOP_BOTTOM)
+            flip_v_img = self.cropped_img
+            show_flip_v = ImageTk.PhotoImage(flip_v_img)
+            crop_label.config(image=show_flip_v)
+            crop_label.image = show_flip_v
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+
+    def clear_crop_input(self, l_entry, r_entry, t_entry, b_entry):
+        l_entry.delete('0', 'end')
+        r_entry.delete('0', 'end')
+        t_entry.delete('0', 'end')
+        b_entry.delete('0', 'end')
+        

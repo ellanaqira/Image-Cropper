@@ -34,7 +34,6 @@ class Main_window:
 
         self.main_element.buttons()
 
-
         self.window_setup()
 
     def window_setup(self):

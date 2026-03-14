@@ -12,6 +12,11 @@ class Aset:
         self.zoomout_crop_icon = self.load_img('aset/crop_zoomout.png', (25,25))
         self.save_icon = self.load_img('aset/save.png', (25,25))
         self.rotate_icon = self.load_img('aset/rotate.png', (25,25))
+        self.flip_h = self.load_img('aset/flip_h.png', (25,25))
+        self.flip_v = self.load_img('aset/flip_v.png', (25,25))
+        self.clear_icon = self.load_img('aset/clear.png', (25,25))
+        self.ask_icon = self.load_img('aset/ask.png', (25,25))
+        self.main_icon = self.load_img('aset/cropper_icon.png', (120,120))
 
 
     def load_img(self, path, size):

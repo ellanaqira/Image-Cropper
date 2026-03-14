@@ -71,6 +71,7 @@ class Main_element:
     def ori_image_label(self):
         self.img_label = Label(self.main_window,
                             #    text="Original Image",
+                            #    font=("system ui", 12),
                             #    compound='top',
                                bg="#FFFFFF",
                                relief='sunken',
@@ -81,6 +82,7 @@ class Main_element:
     def crop_image_label(self):
         self.crop_img_label = Label(self.main_window,
                                     # text="Cropped Image",
+                                    # font=("system ui", 12),
                                     # compound='top',
                                     bg="#FFFFFF",
                                     relief='sunken',
@@ -238,53 +240,91 @@ class Main_element:
         line.separator_line()
 
     def buttons(self):
-        button1 = Button(self.main_frame.frame_btn_tools,
+        # bg color button
+        bg_color_btn = Button(self.main_frame.frame_btn_tools,
                          image=self.aset.bucket_icon,
                          bg="#ffffff",
                          command=lambda: self.main_function.change_bg_color(self.img_label,
                                                                             self.crop_img_label,
-                                                                            button1))
-        button1.grid(row=0, column=0)
+                                                                            bg_color_btn))
+        bg_color_btn.grid(row=0, column=0)
 
-        button2 = self.Button_Tools(self.main_frame.frame_btn_tools,
+        # show full image button
+        show_icon = self.Button_Tools(self.main_frame.frame_btn_tools,
                           self.aset.show_icon,
                           self.main_function.show_crop_img,
                           0,1)
-        button2.button_tool()
+        show_icon.button_tool()
 
-        button3 = self.Button_Tools(self.main_frame.frame_btn_tools,
+        # zoom in original image button
+        ori_zoomin_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.zoomin_icon,
                                     lambda: self.main_function.zoomin_ori_img(self.img_label),
                                     0,2)
-        button3.button_tool()
+        ori_zoomin_btn.button_tool()
 
-        button4 = self.Button_Tools(self.main_frame.frame_btn_tools,
+        # zoom out original image button
+        ori_zoomout_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.zoomout_icon,
                                     lambda: self.main_function.zoomout_ori_img(self.img_label),
                                     0,3)
-        button4.button_tool()
+        ori_zoomout_btn.button_tool()
 
-
-        button5 = self.Button_Tools(self.main_frame.frame_btn_tools,
-                                    self.aset.rotate_icon,
-                                    lambda: self.main_function.rotate(self.crop_img_label),
+        # flip horizontal image button
+        fliph_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.flip_h,
+                                    lambda: self.main_function.flip_horizontal(self.crop_img_label),
                                     1,0)
-        button5.button_tool()
+        fliph_btn.button_tool()
 
-        button6 = self.Button_Tools(self.main_frame.frame_btn_tools,
-                                    self.aset.save_icon,
-                                    None,
+        # flip vertical image button
+        flipv_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.flip_v,
+                                    lambda: self.main_function.flip_vertical(self.crop_img_label),
                                     1,1)
-        button6.button_tool()
+        flipv_btn.button_tool()
 
-        button7 = self.Button_Tools(self.main_frame.frame_btn_tools,
+        # zoom in cropped image button
+        crop_zoomin_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.zoomin_crop_icon,
                                     lambda: self.main_function.zoomin_crop_img(self.crop_img_label),
                                     1,2)
-        button7.button_tool()
-        
-        button8 = self.Button_Tools(self.main_frame.frame_btn_tools,
+        crop_zoomin_btn.button_tool()
+
+        # zoom out cropped image button
+        crop_zoomout_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.zoomout_crop_icon,
                                     lambda: self.main_function.zoomout_crop_img(self.crop_img_label),
                                     1,3)
-        button8.button_tool()
+        crop_zoomout_btn.button_tool()
+
+        # rotate image button
+        rotate_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.rotate_icon,
+                                    lambda: self.main_function.rotate(self.crop_img_label),
+                                    2,0)
+        rotate_btn.button_tool()
+
+        # clear crop input button
+        clear_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.clear_icon,
+                                    lambda: self.main_function.clear_crop_input(self.left_ci.crop_entry,
+                                                                        self.right_ci.crop_entry,
+                                                                        self.top_ci.crop_entry,
+                                                                        self.bottom_ci.crop_entry,),
+                                    2,1)
+        clear_btn.button_tool()
+
+        # save image button
+        save_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.save_icon,
+                                    None,
+                                    2,2)
+        save_btn.button_tool()
+
+        # ask for help button
+        ask_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
+                                    self.aset.ask_icon,
+                                    None,
+                                    2,3)
+        ask_btn.button_tool()
