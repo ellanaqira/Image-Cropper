@@ -38,6 +38,8 @@ class Main_window:
         self.window_setup()
 
     def window_setup(self):
+        icon = PhotoImage(file='aset/cropper_icon.png')
+        self.main_window.iconphoto(True, icon)
         self.main_window.geometry("1000x600")
         self.main_window.title("Image Cropper")
 

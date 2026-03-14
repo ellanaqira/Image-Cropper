@@ -266,13 +266,13 @@ class Main_element:
 
 
         button5 = self.Button_Tools(self.main_frame.frame_btn_tools,
-                                    None,
-                                    None,
+                                    self.aset.rotate_icon,
+                                    lambda: self.main_function.rotate(self.crop_img_label),
                                     1,0)
         button5.button_tool()
 
         button6 = self.Button_Tools(self.main_frame.frame_btn_tools,
-                                    None,
+                                    self.aset.save_icon,
                                     None,
                                     1,1)
         button6.button_tool()

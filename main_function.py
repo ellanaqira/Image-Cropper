@@ -134,6 +134,18 @@ Information
         except AttributeError:
             messagebox.showerror("No Image", "You haven't added any image yet.")
 
+    def rotate(self, crop_label):
+        try:
+            self.cropped_img = self.cropped_img.rotate(90, expand=True)
+            raw_rot_img = self.cropped_img 
+            show_rot_img = ImageTk.PhotoImage(raw_rot_img)
+            crop_label.config(image=show_rot_img)
+            crop_label.image = show_rot_img
+        
+            # rot_img.show()
+        except AttributeError:
+            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+
     def zoomin_crop_img(self, crop_label):
         try:
             self.crop_width = self.crop_width / (90/100)
