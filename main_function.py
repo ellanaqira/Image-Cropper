@@ -1,6 +1,7 @@
 from tkinter import *
+from tkinter import ttk
 from tkinter import colorchooser
-from tkinter import messagebox
+from tkinter import messagebox as mb
 from tkinter import filedialog as fd
 from PIL import Image, ImageTk
 import os
@@ -14,7 +15,6 @@ class Main_function:
         if self.image_file_path:
             self.image = Image.open(self.image_file_path)
             img_size = list(self.image.size)
-            image_name = (os.path.basename(self.image_file_path))
             print(f"image size {img_size}")
             print(img_size[0])
             print(img_size[1])
@@ -63,7 +63,7 @@ class Main_function:
             print(self.cropped_img)
 
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't added any image yet.")
+            mb.showerror("No Image", "You haven't added any image yet.")
     
         except ValueError:
             info_win = Toplevel(master)
@@ -102,7 +102,7 @@ Information
         try:
             self.raw_cropped_img.show()
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't cropped any image.")
+            mb.showerror("No Image", "You haven't cropped any image.")
 
     def zoomin_ori_img(self, ori_label):
         try:
@@ -117,7 +117,7 @@ Information
             ori_label.config(image=show_img)
             ori_label.image = show_img
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't added any image yet.")
+            mb.showerror("No Image", "You haven't added any image yet.")
 
     def zoomout_ori_img(self, ori_label):
         try:
@@ -132,7 +132,7 @@ Information
             ori_label.config(image=show_img)
             ori_label.image = show_img
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't added any image yet.")
+            mb.showerror("No Image", "You haven't added any image yet.")
 
     def rotate(self, crop_label):
         try:
@@ -144,7 +144,7 @@ Information
         
             # rot_img.show()
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+            mb.showerror("No Image", "You haven't cropped any image yet.")
 
     def zoomin_crop_img(self, crop_label):
         try:
@@ -159,7 +159,7 @@ Information
             crop_label.config(image=show_img)
             crop_label.image = show_img
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+            mb.showerror("No Image", "You haven't cropped any image yet.")
 
     def zoomout_crop_img(self, crop_label):
         try:
@@ -174,7 +174,7 @@ Information
             crop_label.config(image=show_img)
             crop_label.image = show_img
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+            mb.showerror("No Image", "You haven't cropped any image yet.")
 
     def flip_horizontal(self, crop_label):
         try:
@@ -184,7 +184,7 @@ Information
             crop_label.config(image=show_flip_h)
             crop_label.image = show_flip_h
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+            mb.showerror("No Image", "You haven't cropped any image yet.")
 
     def flip_vertical(self, crop_label):
         try:
@@ -194,11 +194,77 @@ Information
             crop_label.config(image=show_flip_v)
             crop_label.image = show_flip_v
         except AttributeError:
-            messagebox.showerror("No Image", "You haven't cropped any image yet.")
+            mb.showerror("No Image", "You haven't cropped any image yet.")
 
     def clear_crop_input(self, l_entry, r_entry, t_entry, b_entry):
         l_entry.delete('0', 'end')
         r_entry.delete('0', 'end')
         t_entry.delete('0', 'end')
         b_entry.delete('0', 'end')
-        
+
+    def save_image(self, main_window):
+        save_win = Toplevel(main_window)
+        save_win.attributes('-topmost', bool(True))
+        save_win.geometry("470x190")
+        save_win.resizable(FALSE, FALSE)
+        save_win.title('Save image')
+
+        # file path frame
+        fp_frame = Frame(save_win)
+        fp_frame.pack()
+        # file name frame
+        fn_frame = Frame(save_win)
+        fn_frame.pack()
+        # save button fraem
+        s_btn_frame = Frame(save_win)
+        s_btn_frame.pack()
+
+        # file path label and entry
+        fp_label = Label(fp_frame,
+                        text="File Path---(Paste your file path here)")
+        fp_label.grid(row=0, column=0, sticky='w', pady=(20,0))
+        fp_entry = Entry(fp_frame,
+                    width=50)
+        fp_entry.grid(row=1, column=0, sticky='w')
+
+        # file name label, entry, and combobox
+        fn_label = Label(fn_frame,
+                        text="File Name")
+        fn_label.grid(row=0, column=0, sticky='w')
+        fn_entry = Entry(fn_frame,
+                    width=43)
+        fn_entry.grid(row=1, column=0, sticky='w')
+
+        # Combobox creation
+        n = StringVar()
+        monthchoosen = ttk.Combobox(fn_frame, width = 5, textvariable = n)
+        monthchoosen['values'] = ('.png',
+                                  '.gif',
+                                  '.bmp',
+                                  '.ico')
+        monthchoosen.grid(row=1, column=2)
+        monthchoosen.current(0)
+
+        def save_image():
+            f_path = fp_entry.get()
+            f_name = fn_entry.get()
+            f_format = n.get()
+            if f_path == "":
+                mb.showerror('empty file path', 'you havent enter a File path')
+            elif f_name == "":
+                mb.showerror('empty file name', 'you havent enter a File name')
+            else:
+                try:
+                    print((f"{f_path}/{f_name}"))
+                    self.cropped_img.save(f"{f_path}/{f_name}{f_format}")
+                    mb.showinfo("save image", f"{f_name} has been saved at:\n{f_path}/{f_name}{f_format})")
+                except FileNotFoundError:
+                    mb.showerror("Directory not found", f"No such file or directory: {f_path}/{f_name}{f_format}")
+
+        save_button = Button(s_btn_frame,
+                            text="Save",
+                            bg="#4D75B1",
+                            fg="#ffffff",
+                            padx=187,
+                            command=save_image)
+        save_button.pack(pady=(30,0))       

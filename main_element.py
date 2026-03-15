@@ -226,6 +226,7 @@ class Main_element:
                               padx=21,
                               bg="#4D75B1",
                               fg="#ffffff",
+                              font=("system ui", 10, 'bold'),
                               relief='flat',
                               command=lambda: self.main_function.open_file(self.file_name,
                                                                            self.img_label, 
@@ -318,7 +319,7 @@ class Main_element:
         # save image button
         save_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.save_icon,
-                                    None,
+                                    lambda: self.main_function.save_image(self.main_window),
                                     2,2)
         save_btn.button_tool()
 
