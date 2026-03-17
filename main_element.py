@@ -42,7 +42,7 @@ class Main_element:
         def separator_line(self):
             line = Label(self.frame,
                          image=self.image)
-            line.grid(row=self.row, column=self.column, pady=(10,0))
+            line.grid(row=self.row, column=self.column, pady=(10,10))
 
     # Button tools class
     class Button_Tools:
@@ -70,9 +70,9 @@ class Main_element:
 
     def ori_image_label(self):
         self.img_label = Label(self.main_window,
-                            #    text="Original Image",
-                            #    font=("system ui", 12),
-                            #    compound='top',
+                               text="Original Image",
+                               font=("system ui", 12),
+                               compound='top',
                                bg="#FFFFFF",
                                relief='sunken',
                                padx=0,
@@ -81,9 +81,9 @@ class Main_element:
 
     def crop_image_label(self):
         self.crop_img_label = Label(self.main_window,
-                                    # text="Cropped Image",
-                                    # font=("system ui", 12),
-                                    # compound='top',
+                                    text="Cropped Image",
+                                    font=("system ui", 12),
+                                    compound='top',
                                     bg="#FFFFFF",
                                     relief='sunken',
                                     padx=0,
@@ -222,17 +222,21 @@ class Main_element:
     def open_image_button(self):
         open_img_btn = Button(self.main_frame.frame_button,
                               text="Open Image",
-                              pady=48,
+                              pady=50,
                               padx=21,
                               bg="#4D75B1",
                               fg="#ffffff",
                               font=("system ui", 10, 'bold'),
                               relief='flat',
                               command=lambda: self.main_function.open_file(self.file_name,
-                                                                           self.img_label, 
+                                                                           self.img_label,
                                                                            self.width_label, 
-                                                                           self.height_label))
-        open_img_btn.grid(row=1, column=0, pady=(10,0))
+                                                                           self.height_label,
+                                                                           self.left_ci.crop_entry,
+                                                                           self.right_ci.crop_entry,
+                                                                           self.top_ci.crop_entry,
+                                                                           self.bottom_ci.crop_entry,))
+        open_img_btn.grid(row=1, column=0)
 
     def separator_ln3(self):
         line = self.Separator_Line(self.main_frame.frame_button,
@@ -241,11 +245,17 @@ class Main_element:
         line.separator_line()
 
     def buttons(self):
+        images = {"img1" : self.aset.white_ball,
+                  "img2" : self.aset.gray_ball,
+                  "img3" : self.aset.black_ball,
+                  "img4" : self.aset.color_ball}
         # bg color button
         bg_color_btn = Button(self.main_frame.frame_btn_tools,
                          image=self.aset.bucket_icon,
                          bg="#ffffff",
-                         command=lambda: self.main_function.change_bg_color(self.img_label,
+                         command=lambda: self.main_function.change_bg_color(self.main_window,
+                                                                            images,
+                                                                            self.img_label,
                                                                             self.crop_img_label,
                                                                             bg_color_btn))
         bg_color_btn.grid(row=0, column=0)
@@ -313,7 +323,7 @@ class Main_element:
                                                                         self.right_ci.crop_entry,
                                                                         self.top_ci.crop_entry,
                                                                         self.bottom_ci.crop_entry,),
-                                    2,1)
+                                                                        2,1)
         clear_btn.button_tool()
 
         # save image button
@@ -326,6 +336,15 @@ class Main_element:
         # ask for help button
         ask_btn = self.Button_Tools(self.main_frame.frame_btn_tools,
                                     self.aset.ask_icon,
-                                    None,
-                                    2,3)
+                                    lambda: self.main_function.open_ask_window(self.main_window,
+                                                                               self.aset.swan,
+                                                                               self.aset.crop_input,
+                                                                               self.aset.swan_crop),
+                                                                               2,3)
         ask_btn.button_tool()
+
+    def separator_ln4(self):
+        line = self.Separator_Line(self.main_frame.frame_separator4,
+                                self.aset.line,
+                                0,0)
+        line.separator_line()

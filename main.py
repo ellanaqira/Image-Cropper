@@ -17,7 +17,6 @@ class Main_window:
         self.main_element.size_label_crop()
         # Separator line1
         self.main_element.separator_ln1()
-
         self.main_element.left_cropinput()
         self.main_element.smaller_symbol1()
         self.main_element.right_cropinput()
@@ -27,12 +26,12 @@ class Main_window:
         self.main_element.crop_button()
         # Separator line2
         self.main_element.separator_ln2()
-
         self.main_element.open_image_button()
         # Separator line3
         self.main_element.separator_ln3()
-
         self.main_element.buttons()
+        # Separator line4
+        self.main_element.separator_ln4()
 
         self.window_setup()
 

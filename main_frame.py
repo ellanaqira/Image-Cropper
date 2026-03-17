@@ -40,3 +40,7 @@ class Main_frame:
         # Button tools frame
         self.frame_btn_tools = Frame(self.frame_tool)
         self.frame_btn_tools.pack()
+
+        # Separator frame4
+        self.frame_separator4 = Frame(self.frame_tool)
+        self.frame_separator4.pack()
