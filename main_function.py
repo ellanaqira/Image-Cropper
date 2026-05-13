@@ -4,15 +4,21 @@ from tkinter import colorchooser
 from tkinter import messagebox as mb
 from tkinter import filedialog as fd
 from PIL import Image, ImageTk
+import platform
 
 # ===(Main Function Class)===
 class Main_function:
     # ==(Open File Functions)==========
     def open_file(self, name_label, image_label, width_label, height_label, crop_l, crop_r, crop_u, crop_b):
-        self.file_types = ()
-        self.image_file_path = fd.askopenfilename(initialdir='/home/lana/Pictures',
-                                         filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.ico"),
-                                                    ("all files", "*.*")])
+        file_types: list = [("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.ico"), ("all files", "*.*")]
+
+        if platform.system() == "Linux" or "Darwin":
+            self.image_file_path = fd.askopenfilename(initialdir='/', filetypes=file_types)
+
+        elif platform.system() == "Windows":
+            self.image_file_path = fd.askopenfilename(initialdir='\\', filetypes=file_types)
+
+
         if self.image_file_path:
             self.image = Image.open(self.image_file_path)
             img_size = list(self.image.size)
