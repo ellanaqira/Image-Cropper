@@ -353,7 +353,7 @@ Information
     def open_ask_window(self, root, img1, img2, img3):
         ask_win = Toplevel(root)
         ask_win.attributes('-topmost', bool(True))
-        ask_win.title("How to use D-Note")
+        ask_win.title("How to use Image-Cropper")
         ask_win.geometry("500x875")
         ask_win.resizable(False, False)
         ask_win.configure(bg="#ffffff", padx=10, pady=10)
