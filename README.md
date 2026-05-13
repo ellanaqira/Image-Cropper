@@ -5,7 +5,7 @@ A simple application made with Python, it works to crop images.
 
 <hr>
 
-## Fetures Include:
+## Features Include:
 - image cropping range input
 ![crop_inpu](img_prev/crop_input.png)
 
