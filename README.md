@@ -7,9 +7,11 @@ A simple application made with Python, it works to crop images.
 
 ## Features Include:
 - image cropping range input
+
 ![crop_inpu](img_prev/crop_input.png)
 
 - change background color
+
 ![bg_color](img_prev/bg_color.png)
 
 - show full image
@@ -18,9 +20,11 @@ A simple application made with Python, it works to crop images.
 - turn image
 - clear image cropping range input
 - save image
+
 ![save](img_prev/save.png)
 
 - how to use window
+
 ![how_to_use](img_prev/how_to_use.png)
 
 <hr>
